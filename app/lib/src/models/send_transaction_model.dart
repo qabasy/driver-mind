@@ -54,7 +54,7 @@ class SendTransactionModel extends TransactionModel {
     return SendTransactionModel(
       id: null,
       amount: 0.0,
-      customerName: "empty",
+      customerName: "",
       createDate: DateTime.now(),
     );
   }

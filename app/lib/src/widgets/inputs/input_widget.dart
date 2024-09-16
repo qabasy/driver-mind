@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 
 class InputWidget extends StatelessWidget {
   final TextEditingController controller;
-  final String label, hint;
+  final String label, hint, counter;
   final Widget? prefix, suffix;
   final String? initialValue;
   final Function(String) onChanged;
   const InputWidget({
     super.key,
-    required this.controller,
-    required this.onChanged,
-    required this.label,
-    this.hint = "Hint",
     this.prefix,
     this.suffix,
     this.initialValue,
+    required this.label,
+    this.hint = "Hint",
+    this.counter = "",
+    required this.controller,
+    required this.onChanged,
   });
 
   @override

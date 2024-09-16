@@ -248,7 +248,7 @@ class Purchases {
 
   // read
   static Future<List<PurchaseModel>> read(
-    final PurchaseModel purchase, {
+    final PurchaseModel? purchase, {
     final int? limit,
     final String? groupBy,
     final String? having,
@@ -256,15 +256,17 @@ class Purchases {
   }) async {
     List<PurchaseModel> result = [];
     await DatabaseHelper.instance.database.then((db) async {
-      await db.query(
+      await db
+          .query(
         DatabaseHelper.tbPurchases,
-        where: "id = ?",
+        // where: "id = ?",
         limit: limit,
         groupBy: groupBy,
         having: having,
         orderBy: orderBy,
-        whereArgs: [purchase.id],
-      ).then((value) {
+        // whereArgs: [purchase.id],
+      )
+          .then((value) {
         for (var element in value) {
           result.add(PurchaseModel.fromMap(element));
         }

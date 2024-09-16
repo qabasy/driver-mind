@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:m_toast/m_toast.dart';
 
 void showCustomDialog(
   BuildContext context, {
@@ -13,7 +16,7 @@ void showCustomDialog(
   showDialog(
     traversalEdgeBehavior: TraversalEdgeBehavior.leaveFlutterView,
     context: context,
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         content: content,
         title: Row(
@@ -21,8 +24,19 @@ void showCustomDialog(
           children: [
             Text(title),
             IconButton(
-              onPressed: onDeletePressed,
+              onPressed: () {
+                if (onDeletePressed != null) {
+                  onDeletePressed();
+                  ShowMToast(context).successToast(
+                    message: "Deletion Success",
+                    alignment: Alignment.bottomCenter,
+                  );
+                }
+              },
               icon: Icon(Icons.delete_forever_rounded),
+              color: onDeletePressed != null
+                  ? Theme.of(context).colorScheme.error
+                  : null,
             ),
           ],
         ),

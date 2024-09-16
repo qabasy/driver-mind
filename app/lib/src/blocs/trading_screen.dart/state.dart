@@ -3,7 +3,9 @@ abstract class TradingScreenState {}
 class TradingScreenInitState extends TradingScreenState {}
 
 // * CRUD operations
-class TradingScreenReadState extends TradingScreenState {}
+class TradingScreenReadPurchaseState extends TradingScreenState {}
+
+class TradingScreenReadSalesState extends TradingScreenState {}
 
 class TradingScreenInsertState extends TradingScreenState {}
 

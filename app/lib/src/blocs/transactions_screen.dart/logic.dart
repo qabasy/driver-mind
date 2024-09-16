@@ -71,6 +71,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
         print("error:[$s], $error");
       }
     });
+    getSendTransactions();
   }
 
   Future insertReceiveTransaction(final ReceiveTransactionModel model) async {
@@ -81,34 +82,41 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
         print("error:[$s], $error");
       }
     });
+    getReceiveTransactions();
   }
 
-  void toggleTransactionType() {
+  Future toggleTransactionType() async {
     selectedTabIndex = (selectedTabIndex == 0) ? 1 : 0;
     emit(TransactionsScreenToggleTransactionTypeState());
+    getReceiveTransactions();
+    getSendTransactions();
   }
 
-  void removeSendTransaction(final SendTransactionModel model) async {
+  Future removeSendTransaction(final SendTransactionModel model) async {
     await SendTransactions.delete(model).whenComplete(() {
       emit(TransactionsScreenDeleteState());
     });
+    getSendTransactions();
   }
 
-  void removeReceiveTransaction(final ReceiveTransactionModel model) async {
+  Future removeReceiveTransaction(final ReceiveTransactionModel model) async {
     await ReceiveTransactions.delete(model).whenComplete(() {
       emit(TransactionsScreenDeleteState());
     });
+    getReceiveTransactions();
   }
 
-  void updateReceiveTransaction(final ReceiveTransactionModel model) async {
+  Future updateReceiveTransaction(final ReceiveTransactionModel model) async {
     await ReceiveTransactions.update(model).whenComplete(() {
       emit(TransactionsScreenUpdateState());
     });
+    getReceiveTransactions();
   }
 
-  void updateSendTransaction(final SendTransactionModel model) async {
+  Future updateSendTransaction(final SendTransactionModel model) async {
     await SendTransactions.update(model).whenComplete(() {
       emit(TransactionsScreenUpdateState());
     });
+    getSendTransactions();
   }
 }

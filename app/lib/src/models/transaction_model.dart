@@ -5,9 +5,9 @@ abstract class TransactionModel {
   final String customerName;
   final DateTime createDate;
   TransactionModel({
+    this.notes,
     required this.id,
     required this.amount,
-    this.notes,
     required this.customerName,
     required this.createDate,
   });

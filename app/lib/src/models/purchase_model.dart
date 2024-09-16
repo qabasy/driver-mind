@@ -1,17 +1,15 @@
-class PurchaseModel {
-  final int? id;
-  final String customerName;
-  final DateTime createDate;
-  final double amount, price, total;
+import 'package:app/src/models/trading_model.dart';
 
+class PurchaseModel extends TradingModel {
   // Constructor
   PurchaseModel({
-    required this.id,
-    required this.customerName,
-    required this.amount,
-    required this.price,
-    required this.total,
-    required this.createDate,
+    super.id,
+    super.notes,
+    required super.amount,
+    required super.price,
+    required super.total,
+    required super.createDate,
+    required super.customerName,
   });
 
   // fromMap
@@ -24,7 +22,7 @@ class PurchaseModel {
       price: (sale.containsKey("price") ? sale["price"] : 0),
       total: (sale.containsKey("total") ? sale["total"] : 0),
       createDate: (sale.containsKey("create_date")
-          ? sale["create_date"]
+          ? DateTime.tryParse(sale["create_date"]) ?? DateTime.now()
           : DateTime.now()),
     );
   }
@@ -36,7 +34,7 @@ class PurchaseModel {
       "total": total,
       "price": price,
       "amount": amount,
-      "create_date": createDate,
+      "create_date": createDate.toString(),
       "customer_name": customerName,
     };
   }

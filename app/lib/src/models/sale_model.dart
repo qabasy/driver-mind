@@ -1,17 +1,15 @@
-class SaleModel {
-  final int? id;
-  final String customerName;
-  final DateTime createDate;
-  final double amount, price, total;
+import 'package:app/src/models/trading_model.dart';
 
+class SaleModel extends TradingModel {
   // Constructor
   SaleModel({
-    required this.id,
-    required this.customerName,
-    required this.amount,
-    required this.price,
-    required this.total,
-    required this.createDate,
+    super.id,
+    super.notes,
+    required super.price,
+    required super.total,
+    required super.amount,
+    required super.createDate,
+    required super.customerName,
   });
 
   // fromMap
@@ -24,7 +22,7 @@ class SaleModel {
       price: (sale.containsKey("price") ? sale["price"] : 0),
       total: (sale.containsKey("total") ? sale["total"] : 0),
       createDate: (sale.containsKey("create_date")
-          ? sale["create_date"]
+          ? DateTime.tryParse(sale["create_date"]) ?? DateTime.now()
           : DateTime.now()),
     );
   }
@@ -36,11 +34,11 @@ class SaleModel {
       "total": total,
       "price": price,
       "amount": amount,
-      "create_date": createDate,
+      "create_date": createDate.toString(),
       "customer_name": customerName,
     };
   }
-
+// DateFormat.yMd().format(DateTime.tryParse(createDate) ?? DateTime.now());
   // // toUpdateMap
   // Map<String, dynamic> toUpdateMap() {
   //   return {

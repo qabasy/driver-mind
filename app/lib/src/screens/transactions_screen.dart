@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
 import 'package:app/src/blocs/transactions_screen.dart/logic.dart';
 import 'package:app/src/blocs/transactions_screen.dart/state.dart';
@@ -12,6 +12,7 @@ import 'package:app/src/widgets/tabs/rounded_tab.dart';
 import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class TransactionsScreen extends StatelessWidget {
   final TextEditingController notesController = TextEditingController();
@@ -37,7 +38,6 @@ class TransactionsScreen extends StatelessWidget {
           TransactionsScreenLogic obj = BlocProvider.of(context);
           return Scaffold(
             appBar: AppBar(
-              leading: Icon(Icons.import_export_rounded),
               title: Text("Transactions"),
             ),
             body: Padding(
@@ -107,6 +107,7 @@ class TransactionsScreen extends StatelessWidget {
                                           onTap: () {
                                             showCustomDialog(context,
                                                 content: TransactionPop(
+                                                  context: context,
                                                   model: (obj.selectedTabIndex ==
                                                           0
                                                       ? obj.sendTransactions[
@@ -150,7 +151,6 @@ class TransactionsScreen extends StatelessWidget {
                                                         .receiveTransactions[
                                                             index]
                                                         .customerName),
-                                                // .customerName,
                                                 overflow: TextOverflow.fade,
                                               ),
                                             ),
@@ -217,55 +217,92 @@ class TransactionsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            bottomNavigationBar: AnimatedBottomNavigationBar(
-              barColor: Colors.white,
-              controller: FloatingBottomBarController(
-                initialIndex: 1,
-              ),
-              bottomBar: const [],
-              bottomBarCenterModel: BottomBarCenterModel(
-                centerBackgroundColor: Theme.of(context).primaryColor,
-                centerIcon: const FloatingCenterButton(
-                  child: Icon(
-                    Icons.add,
-                    color: AppColors.white,
-                  ),
+            // bottomNavigationBar: AnimatedBottomNavigationBar(
+            //   barColor: Colors.white,
+            //   controller: FloatingBottomBarController(
+            //     initialIndex: 1,
+            //   ),
+            //   bottomBar: const [],
+            //   bottomBarCenterModel: BottomBarCenterModel(
+            //     centerBackgroundColor: Theme.of(context).primaryColor,
+            //     centerIcon: const FloatingCenterButton(
+            //       child: Icon(
+            //         Icons.add,
+            //         color: AppColors.white,
+            //       ),
+            //     ),
+            //     centerIconChild: [
+            //       FloatingCenterButtonChild(
+            //         child: Icon(
+            //           Icons.call_made_rounded,
+            //           color: AppColors.white,
+            //         ),
+            //         onTap: () async {
+            //           showCustomDialog(
+            //             context,
+            //             title: "Send Money",
+            //             content: TransactionPop(
+            //               transactionType: TransactionType.send,
+            //               model: SendTransactionModel.empty(),
+            //             ),
+            //           );
+            //         },
+            //       ),
+            //       FloatingCenterButtonChild(
+            //         child: Icon(
+            //           Icons.call_received_rounded,
+            //           color: AppColors.white,
+            //         ),
+            //         onTap: () {
+            //           showCustomDialog(
+            //             context,
+            //             title: ("Receive Money"),
+            //             content: TransactionPop(
+            //               transactionType: TransactionType.receive,
+            //               model: ReceiveTransactionModel.empty(),
+            //             ),
+            //           );
+            //         },
+            //       ),
+            //     ],
+            //   ),
+            // ),
+
+            floatingActionButton: SpeedDial(
+              child: Icon(Icons.add),
+              activeIcon: Icons.close_rounded,
+              children: [
+                SpeedDialChild(
+                  label: "Receive",
+                  child: Icon(Icons.call_received_rounded),
+                  onTap: () {
+                    showCustomDialog(
+                      context,
+                      title: ("Receive Money"),
+                      content: TransactionPop(
+                        context: context,
+                        transactionType: TransactionType.receive,
+                        model: ReceiveTransactionModel.empty(),
+                      ),
+                    );
+                  },
                 ),
-                centerIconChild: [
-                  FloatingCenterButtonChild(
-                    child: Icon(
-                      Icons.call_made_rounded,
-                      color: AppColors.white,
-                    ),
-                    onTap: () async {
-                      showCustomDialog(
-                        context,
-                        title: "Send Money",
-                        content: TransactionPop(
-                          transactionType: TransactionType.send,
-                          model: SendTransactionModel.empty(),
-                        ),
-                      );
-                    },
-                  ),
-                  FloatingCenterButtonChild(
-                    child: Icon(
-                      Icons.call_received_rounded,
-                      color: AppColors.white,
-                    ),
-                    onTap: () {
-                      showCustomDialog(
-                        context,
-                        title: ("Receive Money"),
-                        content: TransactionPop(
-                          transactionType: TransactionType.receive,
-                          model: ReceiveTransactionModel.empty(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
+                SpeedDialChild(
+                  label: "Pay",
+                  child: Icon(Icons.call_made_rounded),
+                  onTap: () {
+                    showCustomDialog(
+                      context,
+                      title: "Pay Money",
+                      content: TransactionPop(
+                        context: context,
+                        transactionType: TransactionType.send,
+                        model: SendTransactionModel.empty(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           );
         },
