@@ -168,7 +168,7 @@ class Sales {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbSales,
-        sale.toMap().remove("id"),
+        sale.toUpdateMap(),
         where: "id = ?",
         whereArgs: [sale.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -236,9 +236,10 @@ class Purchases {
   // update
   static Future update(final PurchaseModel purchase) async {
     await DatabaseHelper.instance.database.then((db) async {
+      print(purchase.toMap());
       await db.update(
         DatabaseHelper.tbPurchases,
-        purchase.toMap().remove("id"),
+        purchase.toUpdateMap(),
         where: "id = ?",
         whereArgs: [purchase.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -324,9 +325,10 @@ class SendTransactions {
   // update
   static Future update(final SendTransactionModel sendTransaction) async {
     await DatabaseHelper.instance.database.then((db) async {
+      print(sendTransaction.toMap());
       await db.update(
         DatabaseHelper.tbSendTransactions,
-        sendTransaction.toMap().remove("id"),
+        sendTransaction.toUpdateMap(),
         where: "id = ?",
         whereArgs: [sendTransaction.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -386,7 +388,7 @@ class ReceiveTransactions {
         });
       },
     );
-    print("GetTotal: $total");
+    // print("GetTotal: $total");
     return total;
   }
 
@@ -417,7 +419,7 @@ class ReceiveTransactions {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbReceiveTransactions,
-        receiveTransaction.toMap().remove("id"),
+        receiveTransaction.toUpdateMap(),
         where: "id = ?",
         whereArgs: [receiveTransaction.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -488,7 +490,7 @@ class SalesDocuments {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbSalesDocuments,
-        model.toMap().remove("id"),
+        model.toMap(),
         where: "id = ?",
         whereArgs: [model.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -555,7 +557,7 @@ class PurchasesDocuments {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbPurchasesDocuments,
-        model.toMap().remove("id"),
+        model.toMap(),
         where: "id = ?",
         whereArgs: [model.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -622,7 +624,7 @@ class SendTransactionsDocuments {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbSendTransactionsDocuments,
-        model.toMap().remove("id"),
+        model.toMap(),
         where: "id = ?",
         whereArgs: [model.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,
@@ -689,7 +691,7 @@ class ReceiveTransactionsDocuments {
     await DatabaseHelper.instance.database.then((db) async {
       await db.update(
         DatabaseHelper.tbReceiveTransactionsDocuments,
-        model.toMap().remove("id"),
+        model.toMap(),
         where: "id = ?",
         whereArgs: [model.id],
         conflictAlgorithm: sqflite.ConflictAlgorithm.replace,

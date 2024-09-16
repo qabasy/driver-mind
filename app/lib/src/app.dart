@@ -17,7 +17,7 @@ class DriverMindApp extends StatelessWidget {
         darkTheme: FlexThemeData.dark(scheme: FlexScheme.cyanM3),
 
         // routes
-        home: TransactionsScreen(),
+        home: const BaseScreen(),
       ),
     );
   }
