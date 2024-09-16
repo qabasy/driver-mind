@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, must_be_immutable
 
 import 'package:app/src/blocs/transactions_screen.dart/logic.dart';
 import 'package:app/src/blocs/transactions_screen.dart/state.dart';

@@ -9,7 +9,6 @@ import 'package:app/src/screens/transaction_pop.dart';
 import 'package:app/src/utils/show_custom_dialog.dart';
 import 'package:app/src/widgets/payments/total_widget.dart';
 import 'package:app/src/widgets/tabs/rounded_tab.dart';
-import 'package:floating_bottom_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';

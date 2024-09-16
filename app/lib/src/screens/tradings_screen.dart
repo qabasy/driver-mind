@@ -12,6 +12,7 @@ import 'package:app/src/utils/show_custom_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:app/src/blocs/trading_screen.dart/logic.dart';
 import 'package:app/src/blocs/trading_screen.dart/state.dart';
+import 'package:m_toast/m_toast.dart';
 
 class TradingScreen extends StatelessWidget {
   final TextEditingController notesController = TextEditingController();
@@ -39,11 +40,11 @@ class TradingScreen extends StatelessWidget {
               appBar: AppBar(
                 bottom: TabBar(tabs: [
                   Tab(
-                    text: "Purchases",
+                    text: "Sales",
                     // icon: Icon(Icons.production_quantity_limits),
                   ),
                   Tab(
-                    text: "Sales",
+                    text: "Purchases",
                     // icon: Icon(Icons.production_quantity_limits),
                   ),
                 ]),
@@ -61,13 +62,12 @@ class TradingScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Purchases",
+                              "Sales",
                               style: Theme.of(context).textTheme.titleLarge,
                             ),
                             CircleAvatar(
                               child: Text(
                                 "${obj.sales.length}",
-                                // style: Theme.of(context).textTheme.titleLarge,
                               ),
                             ),
                           ],
@@ -76,7 +76,28 @@ class TradingScreen extends StatelessWidget {
                         for (int index = 0; index < obj.sales.length; index++)
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: TradingCard(model: obj.sales[index]),
+                            child: TradingCard(
+                                model: obj.sales[index],
+                                onUpdate: () {
+                                  showCustomDialog(
+                                    context,
+                                    content: TradingPop(
+                                      context: context,
+                                      model: obj.sales[index],
+                                      transactionType: TransactionType.editSell,
+                                    ),
+                                    title: "Edit Transaction",
+                                    onDeletePressed: () async {
+                                      await obj.deleteSale(
+                                        obj.sales[index],
+                                      );
+                                      ShowMToast(context).successToast(
+                                          message:
+                                              "Success! Deleted Successfully!",
+                                          alignment: Alignment.bottomCenter);
+                                    },
+                                  );
+                                }),
                           ),
                       ],
                     ),
@@ -122,9 +143,6 @@ class TradingScreen extends StatelessWidget {
                                       Padding(
                                         padding: EdgeInsets.only(top: 10),
                                         child: ListTile(
-                                          tileColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
                                           style: ListTileStyle.list,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -132,7 +150,25 @@ class TradingScreen extends StatelessWidget {
                                           ),
                                           titleAlignment:
                                               ListTileTitleAlignment.center,
-                                          onTap: () {},
+                                          onTap: () {
+                                            showCustomDialog(
+                                              context,
+                                              content: TradingPop(
+                                                context: context,
+                                                model: obj.purchases[index],
+                                                transactionType:
+                                                    TransactionType.editBuy,
+                                              ),
+                                              title: "Edit Transaction",
+                                              onDeletePressed: () async {
+                                                await obj.deletePurchase(
+                                                  obj.purchases[index],
+                                                );
+                                              },
+                                            );
+
+                                            // Navigator.of(context).pop();
+                                          },
                                           title: Text(
                                             obj.purchases[index].customerName,
                                             style: Theme.of(context)
@@ -155,13 +191,16 @@ class TradingScreen extends StatelessWidget {
                                           trailing: SizedBox(
                                             width: 100,
                                             child: Text(
-                                              Constants.currency.format(
+                                              "-${Constants.currency.format(
                                                 obj.purchases[index].total,
-                                              ),
+                                              )}",
                                               textAlign: TextAlign.right,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .labelLarge,
+                                                  .labelLarge!
+                                                  .copyWith(
+                                                      color: Constants
+                                                          .primaryColor),
                                               overflow: TextOverflow.fade,
                                             ),
                                           ),
@@ -192,6 +231,7 @@ class TradingScreen extends StatelessWidget {
                     label: "Buy",
                     onTap: () {
                       showCustomDialog(
+                        title: "Buy",
                         context,
                         content: TradingPop(
                           context: context,
@@ -214,6 +254,7 @@ class TradingScreen extends StatelessWidget {
                     label: "Sell",
                     onTap: () async {
                       showCustomDialog(
+                        title: "Sell",
                         onDeletePressed: () {},
                         context,
                         content: TradingPop(

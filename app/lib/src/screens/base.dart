@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:app/src/screens/home_screen.dart';
-import 'package:app/src/screens/trading_screen.dart';
+import 'package:app/src/screens/tradings_screen.dart';
 import 'package:app/src/screens/transactions_screen.dart';
 import 'package:flutter/material.dart';
 

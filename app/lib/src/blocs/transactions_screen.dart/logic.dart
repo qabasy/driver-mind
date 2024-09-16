@@ -50,6 +50,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       }
     });
     emit(TransactionsScreenReadSendState());
+    getTotalPaid();
   }
 
   void getReceiveTransactions() async {
@@ -61,6 +62,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       }
     });
     emit(TransactionsScreenReadReceiveState());
+    getTotalReceived();
   }
 
   Future insertSendTransaction(final SendTransactionModel model) async {
@@ -72,6 +74,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       }
     });
     getSendTransactions();
+    getTotalPaid();
   }
 
   Future insertReceiveTransaction(final ReceiveTransactionModel model) async {
@@ -83,6 +86,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       }
     });
     getReceiveTransactions();
+    getTotalReceived();
   }
 
   Future toggleTransactionType() async {
@@ -97,6 +101,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       emit(TransactionsScreenDeleteState());
     });
     getSendTransactions();
+    getTotalPaid();
   }
 
   Future removeReceiveTransaction(final ReceiveTransactionModel model) async {
@@ -104,6 +109,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       emit(TransactionsScreenDeleteState());
     });
     getReceiveTransactions();
+    getTotalReceived();
   }
 
   Future updateReceiveTransaction(final ReceiveTransactionModel model) async {
@@ -111,6 +117,7 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       emit(TransactionsScreenUpdateState());
     });
     getReceiveTransactions();
+    getTotalReceived();
   }
 
   Future updateSendTransaction(final SendTransactionModel model) async {
@@ -118,5 +125,6 @@ class TransactionsScreenLogic extends Cubit<TransactionsScreenState> {
       emit(TransactionsScreenUpdateState());
     });
     getSendTransactions();
+    getTotalPaid();
   }
 }

@@ -147,7 +147,7 @@ class TradingPop extends StatelessWidget {
                                         0) *
                                     (double.tryParse(priceController.text) ??
                                         0) /
-                                    10000,
+                                    1,
                               ),
                             );
                           } else if (transactionType ==
@@ -166,7 +166,7 @@ class TradingPop extends StatelessWidget {
                                         0) *
                                     (double.tryParse(priceController.text) ??
                                         0) /
-                                    1000,
+                                    1,
                               ),
                             );
                           }

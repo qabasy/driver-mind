@@ -24,6 +24,8 @@ abstract class TradingModel {
 
     return {
       "amount": amount,
+      "price": price,
+      "total": total,
       "notes": notes,
       "customer_name": customerName,
       "create_date": createDate.toString(),

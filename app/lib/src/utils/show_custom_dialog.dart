@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:m_toast/m_toast.dart';
 
@@ -9,7 +7,7 @@ void showCustomDialog(
   BuildContext context, {
   final void Function()? onDeletePressed,
   required Widget content,
-  String title = "Dialog",
+  required title,
   List<Widget>? actions,
   void Function()? onPressed,
 }) {
@@ -24,13 +22,14 @@ void showCustomDialog(
           children: [
             Text(title),
             IconButton(
-              onPressed: () {
+              onPressed: () async {
                 if (onDeletePressed != null) {
                   onDeletePressed();
-                  ShowMToast(context).successToast(
+                  await ShowMToast(context).successToast(
                     message: "Deletion Success",
                     alignment: Alignment.bottomCenter,
                   );
+                  Navigator.of(context).pop();
                 }
               },
               icon: Icon(Icons.delete_forever_rounded),
