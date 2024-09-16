@@ -1,11 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app/src/config/constants.dart';
-import 'package:app/src/screens/base.dart';
-import 'package:app/src/screens/home_screen.dart';
-import 'package:app/src/screens/tradings_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:app/src/screens/base.dart';
+import 'package:app/src/config/constants.dart';
 
 class DriverMindApp extends StatelessWidget {
   const DriverMindApp({super.key});

@@ -6,6 +6,7 @@ class InputWidget extends StatelessWidget {
   final Widget? prefix, suffix;
   final String? initialValue;
   final Function(String) onChanged;
+  final TextInputType? inputType;
   const InputWidget({
     super.key,
     this.prefix,
@@ -16,6 +17,7 @@ class InputWidget extends StatelessWidget {
     this.counter = "",
     required this.controller,
     required this.onChanged,
+    this.inputType,
   });
 
   @override
@@ -23,7 +25,7 @@ class InputWidget extends StatelessWidget {
     return TextFormField(
       initialValue: initialValue,
       onChanged: onChanged,
-      keyboardType: TextInputType.number,
+      keyboardType: inputType,
       controller: controller,
       style: const TextStyle(
         // fontSize: 25,

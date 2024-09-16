@@ -81,6 +81,8 @@ class Constants {
     // customPattern: " \u00a4#,###".trim(),
     // customPattern: "#,###",
   );
+
+  // static List<PageViewModel> introductionPages = [];
   // static ShowMToast toast  = ShowMToast(ShowMToast().globalContext);
 }
 
