@@ -12,9 +12,10 @@ void main(List<String> args) async {
   //   sqflite_common_ffi.databaseFactory = sqflite_common_ffi.databaseFactoryFfi;
   // }
 
-  await Permission.manageExternalStorage.request();
-  await Permission.systemAlertWindow.request();
-  await Permission.criticalAlerts.request();
+  // await Permission.systemAlertWindow.request();
+  // await Permission.criticalAlerts.request();
+  
+
   runApp(const DriverMindApp());
   // await Permission.storage.request().then((value) {
   //   if (!(value == PermissionStatus.denied ||
