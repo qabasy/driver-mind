@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+import 'package:app/src/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/src/screens/base.dart';
 import 'package:app/src/config/constants.dart';
@@ -19,12 +21,22 @@ class _DriverMindAppState extends State<DriverMindApp> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     // TODO: implement initState
     super.initState();
-    if (await status() != PermissionStatus.granted) {
-      await Fluttertoast.showToast(msg: "Access Denied");
-    }
+    Timer(
+      const Duration(seconds: 3),
+      () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => const SplashScreen(),
+          ), // Replace with your home page
+        );
+      },
+    );
+    // if (await status() != PermissionStatus.granted) {
+    //   await Fluttertoast.showToast(msg: "Access Denied");
+    // }
   }
 
   @override
